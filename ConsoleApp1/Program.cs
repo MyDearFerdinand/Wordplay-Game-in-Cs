@@ -5,6 +5,10 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.BackgroundColor = ConsoleColor.White;
+        Console.Clear();
+
         List<string> words = new List<string>() { "apple", "banana", "cherry", "watermelon", "orange" };
 
         Random rand = new Random();
@@ -19,20 +23,23 @@ class Program
             Console.WriteLine(guessedWord);
             Console.WriteLine("Enter a letter:");
             char letter = Convert.ToChar(Console.ReadLine());
-
-            for (int i = 0; i < chosenWord.Length; i++)
+            if (char.IsLetter(letter))
             {
-                if (chosenWord[i] == letter)
+                for (int i = 0; i < chosenWord.Length; i++)
                 {
-                    guessedWord = guessedWord.Remove(i, 1);
-                    guessedWord = guessedWord.Insert(i, letter.ToString());
+                    if (chosenWord[i] == letter)
+                    {
+                        guessedWord = guessedWord.Remove(i, 1);
+                        guessedWord = guessedWord.Insert(i, letter.ToString());
+                    }
                 }
-            }
 
-            if (!chosenWord.Contains(letter))
-            {
-                Console.WriteLine("No, the word doesn't contain the letter " + letter);
-            }
+                if (!chosenWord.Contains(letter))
+                {
+                    Console.WriteLine("No, the word doesn't contain the letter " + letter);
+                }
+                }
+            else { Console.WriteLine("Type only one letter per move"); }
         }
 
         Console.WriteLine(guessedWord);
